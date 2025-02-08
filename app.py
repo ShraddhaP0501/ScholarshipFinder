@@ -36,7 +36,24 @@ def findscholarship():
         return render_template("index.html", scholarships=scholarships)
     except Exception as e:
         print(e)
-        
+@app.route("/allscholarships", methods=["GET"])
+def allscholarships():
+    try:
+        conn = getdatabase()
+        if not conn:
+            return "Error: Unable to connect to the database."
+
+        cursor = conn.cursor()
+        cursor.execute("SELECT DISTINCT ScholarshipName, Details, Eligibility FROM scholarships")
+        all_scholarships = cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+        return render_template("index2.html", all_scholarships=all_scholarships)
+
+    except Exception as e:
+        print("Error fetching all scholarships:", e)
+        return "Error: Unable to retrieve data."  
 
 
 if __name__ == "__main__":
