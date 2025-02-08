@@ -49,7 +49,7 @@ def allscholarships():
         cursor.close()
         conn.close()
 
-        return render_template("index2.html", all_scholarships=all_scholarships)
+        return render_template("index.html", all_scholarships=all_scholarships)
 
     except Exception as e:
         print("Error fetching all scholarships:", e)
