@@ -1,23 +1,30 @@
 import mysql.connector
 from flask import Flask, render_template, request
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
+load_dotenv()
 
 def getdatabase():
     try:
         conn = mysql.connector.connect(
-            host="127.0.0.1", user="root", password="root", database="scholarshipfinder"
+            host=os.getenv("DATABASE_HOST"),
+            user=os.getenv("DATABASE_USER"),
+            password=os.getenv("DATABASE_PASSWORD"),
+            database=os.getenv("DATABASE_NAME"),
         )
         return conn
-    except Exception as e:
-        print(e)
+    except mysql.connector.Error as e:
+        print("Database connection error:", e)
+        return None
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
-
+#find scholarships
 @app.route("/find", methods=["POST"])
 def findscholarship():
     try:
@@ -36,6 +43,8 @@ def findscholarship():
         return render_template("index.html", scholarships=scholarships)
     except Exception as e:
         print(e)
+
+#allscholarships
 @app.route("/allscholarships", methods=["GET"])
 def allscholarships():
     try:
