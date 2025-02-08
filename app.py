@@ -26,7 +26,7 @@ def home():
     return render_template("home.html")
 
 #find scholarships
-@app.route("/find", methods=["POST"])
+@app.route("/find", methods=["POST","GET"])
 def findscholarship():
     try:
         category = request.form.get("category")
