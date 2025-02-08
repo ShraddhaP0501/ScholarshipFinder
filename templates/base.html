@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Scholarship Finder{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="logo">Scholarships<span>.com</span></div>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/find">Find</a></li>
+            <li><a href="/allscholarships">Show All Scholarships</a></li>
+            <li><a href="#about">About Us</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- <section id="footer"> -->
+    <footer class="footer" id="about">
+        <div class="footer-container">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>Scholarship Finder is a comprehensive platform designed to help students find scholarships that
+                    match
+                    their unique profiles.</p>
+                <p>We aim to make education more accessible by connecting students with the right financial
+                    opportunities.
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Why Choose Us?</h3>
+                <ul>
+                    <li>✔ Tailored results</li>
+                    <li>✔ Comprehensive database</li>
+                    <li>✔ User-friendly experience</li>
+                    <li>✔ Reliable information</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Find Scholarships</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Scholarship Finder | All Rights Reserved</p>
+        </div>
+    </footer>
+    <!-- </section> -->
+
+</body>
+
+</html>

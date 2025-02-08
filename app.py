@@ -13,9 +13,10 @@ def getdatabase():
     except Exception as e:
         print(e)
 
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("home.html")
 
 
 @app.route("/find", methods=["POST"])
@@ -33,9 +34,11 @@ def findscholarship():
         scholarships = cursor.fetchall()
         cursor.close()
         conn.close()
-        return render_template("index.html", scholarships=scholarships)
+        return render_template("home.html", scholarships=scholarships)
     except Exception as e:
         print(e)
+
+
 @app.route("/allscholarships", methods=["GET"])
 def allscholarships():
     try:
@@ -44,16 +47,25 @@ def allscholarships():
             return "Error: Unable to connect to the database."
 
         cursor = conn.cursor()
-        cursor.execute("SELECT DISTINCT ScholarshipName, Details, Eligibility FROM scholarships")
+        cursor.execute(
+            "SELECT DISTINCT ScholarshipName, Details, Eligibility FROM scholarships"
+        )
         all_scholarships = cursor.fetchall()
         cursor.close()
         conn.close()
 
-        return render_template("index2.html", all_scholarships=all_scholarships)
+        return render_template(
+            "all-scholarship.html", all_scholarships=all_scholarships
+        )
 
     except Exception as e:
         print("Error fetching all scholarships:", e)
-        return "Error: Unable to retrieve data."  
+        return "Error: Unable to retrieve data."
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
 
 
 if __name__ == "__main__":

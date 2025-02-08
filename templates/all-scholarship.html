@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}All - Scholarship Finder{% endblock %}
+
+{% block content %}
+<section id="all_scholarships">
+    {% if all_scholarships %}
+    <h2>All Scholarships</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Scholarship Name</th>
+                <th>Details</th>
+                <th>Eligibility</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scholarship in all_scholarships %}
+            <tr>
+                <td>{{ scholarship[0] }}</td>
+                <td>{{ scholarship[1] }}</td>
+                <td>{{ scholarship[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No scholarships found.</p>
+    {% endif %}
+</section>
+{% endblock %}

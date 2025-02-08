@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}Home - Scholarship Finder{% endblock %}
+
+{% block content %}
+<!--Home Page-->
+<section id="home">
+    <h1 id="home">ScholarShip Finder</h1>
+    <P><b class="bold">Welcome to the Scholarship Finder</b><br>
+
+        Finding the right scholarship can be a challenge, but we make it easy for you! Our Scholarship Finder helps
+        students discover the scholarships they are eligible for based on their unique profiles. Whether you’re
+        looking for opportunities in a specific category, income range, or gender, our platform is here to guide you
+        every step of the way.
+
+        Simply enter your details, and let us do the hard work. We search through a wide range of scholarships and
+        display only those that match your criteria. With just a few clicks, you can unlock the scholarships that
+        can help you achieve your educational goals!</P>
+
+</section>
+
+<!--Find Scholarship-->
+<section id="find">
+    <h2 id="find">Find Scholarships</h2>
+    <form action="/find" method="POST">
+        <label for="gender">GENDER</label>
+        <select id="gender" name="gender" required>
+            <option value="">-- Select --</option>
+            <option value="male">MALE</option>
+            <option value="female">FEMALE</option>
+            <option value="other">Other</option>
+        </select><br><br>
+
+        <label for="category">CATEGORY</label>
+        <select id="category" name="category" required>
+            <option value="">-- Select --</option>
+            <option value="general">General</option>
+            <option value="scbc">SCBC</option>
+            <option value="obc">OBC</option>
+            <option value="st">ST</option>
+            <option value="sc">SC</option>
+            <option value="ews">EWS</option>
+        </select><br><br>
+
+        <label for="income">INCOME</label>
+        <select id="income" name="income" required>
+            <option value="">-- Select --</option>
+            <option value="Below 50000">Below Rs. 50000</option>
+            <option value="50000_100000">Rs. 50,000 - 1,00,000</option>
+            <option value="100000_200000">Rs. 1,00,000 - 2,00,000</option>
+            <option value="200000_300000">Rs. 2,00,000 - 3,00,000</option>
+            <option value="300000_400000">Rs. 3,00,000 - 4,00,000</option>
+            <option value="400000_500000">Rs. 4,00,000 - 5,00,000</option>
+            <option value="500000_600000">Rs. 5,00,000 - 6,00,000</option>
+            <option value="600000_700000">Rs. 6,00,000 - 7,00,000</option>
+            <option value="700000_800000">Rs. 7,00,000 - 8,00,000</option>
+            <option value="more_800000">More than Rs. 8,00,000</option>
+        </select><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+
+    {% if scholarships %}
+    <h2>Available Scholarships</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Scholarship Name</th>
+                <th>Details</th>
+                <th>Eligibility</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scholarship in scholarships %}
+            <tr>
+                <td>{{ scholarship[0] }}</td>
+                <td>{{ scholarship[1] }}</td>
+                <td>{{ scholarship[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No scholarships found matching your criteria.</p>
+    {% endif %}
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</section>
+
+<!--Category wise scholarship-->
+<section id="Categorywisescholarship">
+    <h2>Choose By Category</h2>
+    <div class="scholarship-container">
+        <a href="scholarships.html?category=general" class="scholarship-box">
+            <div>
+                <h3>General Category</h3>
+                <p>Click to view eligible scholarships</p>
+            </div>
+        </a>
+        <a href="scholarships.html?category=sebc" class="scholarship-box">
+            <div>
+                <h3>SEBC Category</h3>
+                <p>Click to view eligible scholarships</p>
+            </div>
+        </a>
+        <a href="scholarships.html?category=obc" class="scholarship-box">
+            <div>
+                <h3>OBC Category</h3>
+                <p>Click to view eligible scholarships</p>
+            </div>
+        </a>
+        <a href="scholarships.html?category=st" class="scholarship-box">
+            <div>
+                <h3>ST Category</h3>
+                <p>Click to view eligible scholarships</p>
+            </div>
+        </a>
+        <a href="scholarships.html?category=sc" class="scholarship-box">
+            <div>
+                <h3>SC Category</h3>
+                <p>Click to view eligible scholarships</p>
+            </div>
+        </a>
+        <a href="scholarships.html?category=ews" class="scholarship-box">
+            <div>
+                <h3>EWS Category</h3>
+                <p>Click to view eligible scholarships</p>
+            </div>
+        </a>
+    </div>
+
+    <!-- Scholarships List Section (This will be dynamically updated) -->
+    <div id="scholarship-list"></div>
+
+</section>
+{% endblock %}
