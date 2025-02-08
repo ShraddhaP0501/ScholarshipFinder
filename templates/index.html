@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +21,7 @@
             <li><a href="#about">About Us</a></li>
             <li><a href="#find">Find</a></li>
             <li><a href="#home">Home</a></li>
-            <li><a href="#allScholarship">AllScholarship</a></li>
+            <li><a href="#all_scholarships">Show All Scholarships</a></li>
         </ul>
     </nav>
 
@@ -68,21 +67,21 @@
             <label for="income">INCOME</label>
             <select id="income" name="income" required>
                 <option value="">-- Select --</option>
-                <option value="Below 50000">Below rs. 50000</option>
-                <option value="50000_100000">50000_100000</option>
-                <option value="100000_200000">100000_200000</option>
-                <option value="200000_300000">200000_300000</option>
-                <option value="300000_400000">300000_400000</option>
-                <option value="400000_500000">400000_500000</option>
-                <option value="500000_600000">500000_600000</option>
-                <option value="600000_700000">500000_600000</option>
-                <option value="700000_800000">500000_600000</option>
-                <option value="more_800000">More 600000</option>
+                <option value="Below 50000">Below Rs. 50000</option>
+                <option value="50000_100000">Rs. 50,000 - 1,00,000</option>
+                <option value="100000_200000">Rs. 1,00,000 - 2,00,000</option>
+                <option value="200000_300000">Rs. 2,00,000 - 3,00,000</option>
+                <option value="300000_400000">Rs. 3,00,000 - 4,00,000</option>
+                <option value="400000_500000">Rs. 4,00,000 - 5,00,000</option>
+                <option value="500000_600000">Rs. 5,00,000 - 6,00,000</option>
+                <option value="600000_700000">Rs. 6,00,000 - 7,00,000</option>
+                <option value="700000_800000">Rs. 7,00,000 - 8,00,000</option>
+                <option value="more_800000">More than Rs. 8,00,000</option>
             </select><br><br>
-
 
             <input type="submit" value="Submit">
         </form>
+        <br>
 
         {% if scholarships %}
         <h2>Available Scholarships</h2>
@@ -105,15 +104,42 @@
             </tbody>
         </table>
         {% else %}
-        <p>No scholarships found matching your criteria.</p>
+            <p>No scholarships found matching your criteria.</p>
         {% endif %}
 
         {% if error %}
-        <p style="color: red;">{{ error }}</p>
+            <p style="color: red;">{{ error }}</p>
         {% endif %}
     </section>
 
-    <section id="allScholarship">
+    <!-- All Scholarships -->
+    <section id="all_scholarships">
+    {% if all_scholarships %}
+        <h2>All Scholarships</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Scholarship Name</th>
+                    <th>Details</th>
+                    <th>Eligibility</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for scholarship in all_scholarships %}
+                <tr>
+                    <td>{{ scholarship[0] }}</td>
+                    <td>{{ scholarship[1] }}</td>
+                    <td>{{ scholarship[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No scholarships found.</p>
+    {% endif %}
+    </section>
+<!--Category wise scholarship-->
+    <section id="Categorywisescholarship">
         <h2>Category Wise ScholarShip</h2>
         <div class="scholarship-container">
             <a href="scholarships.html?category=general" class="scholarship-box">
@@ -175,22 +201,22 @@
             income range, and category. Based on your profile, our Scholarship Finder will search through a wide range
             of available scholarships and display the most relevant opportunities for you to apply for.</p>
 
-        <h3>Why Choose Us?</h3>
-        <ul>
-            <li><strong>Tailored results:</strong> Scholarships tailored to your profile.</li>
+    <h3>Why Choose Us?</h3>
+    <ul>
+        <li><strong>Tailored results:</strong> Scholarships tailored to your profile.</li>
             <li><strong>Comprehensive database:</strong> We pull from a wide range of scholarships across categories and
                 regions.</li>
             <li><strong>User-friendly:</strong> Simple, intuitive design makes it easy to find the right scholarships.
             </li>
             <li><strong>Reliable information:</strong> We work to provide the most up-to-date scholarship information to
                 ensure you're not missing out.</li>
-        </ul>
+    </ul>
 
         <p><strong>Our Team:</strong> Our team consists of passionate individuals who are dedicated to helping students
             succeed. From experienced developers to education advocates, we work together to create an easy-to-use
             platform that empowers students to secure funding for their education.</p>
 
-        <p>Ready to find the perfect scholarship? <a href="#find">Start your search today!</a></p>
+    <p>Ready to find the perfect scholarship? <a href="#find">Start your search today!</a></p>
     </section>
 
 </body>
