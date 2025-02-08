@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScholarShip Finder</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
-    
+
 
     <!--<style>
         body{
@@ -26,153 +26,173 @@
         </ul>
     </nav>
 
-<!--Home Page-->
+    <!--Home Page-->
     <section id="home">
         <h1 id="home">ScholarShip Finder</h1>
         <P><b class="bold">Welcome to the Scholarship Finder</b><br>
 
-            Finding the right scholarship can be a challenge, but we make it easy for you! Our Scholarship Finder helps students discover the scholarships they are eligible for based on their unique profiles. Whether you’re looking for opportunities in a specific category, income range, or gender, our platform is here to guide you every step of the way.
-            
-            Simply enter your details, and let us do the hard work. We search through a wide range of scholarships and display only those that match your criteria. With just a few clicks, you can unlock the scholarships that can help you achieve your educational goals!</P>
-       
+            Finding the right scholarship can be a challenge, but we make it easy for you! Our Scholarship Finder helps
+            students discover the scholarships they are eligible for based on their unique profiles. Whether you’re
+            looking for opportunities in a specific category, income range, or gender, our platform is here to guide you
+            every step of the way.
+
+            Simply enter your details, and let us do the hard work. We search through a wide range of scholarships and
+            display only those that match your criteria. With just a few clicks, you can unlock the scholarships that
+            can help you achieve your educational goals!</P>
+
     </section>
 
-<!--Find Scholarship-->
-<section id="find">
-    <h2 id="find">Find Scholarships</h2>
-    <form action="/find" method="POST">
-        <label for="gender">GENDER</label>
-        <select id="gender" name="gender" required>
-            <option value="">-- Select --</option>
-            <option value="male">MALE</option>
-            <option value="female">FEMALE</option>
-            <option value="other">Other</option>
-        </select><br><br>
+    <!--Find Scholarship-->
+    <section id="find">
+        <h2 id="find">Find Scholarships</h2>
+        <form action="/find" method="POST">
+            <label for="gender">GENDER</label>
+            <select id="gender" name="gender" required>
+                <option value="">-- Select --</option>
+                <option value="male">MALE</option>
+                <option value="female">FEMALE</option>
+                <option value="other">Other</option>
+            </select><br><br>
 
-        <label for="category">CATEGORY</label>
-        <select id="category" name="category" required>
-            <option value="">-- Select --</option>
-            <option value="general">General</option>
-            <option value="scbc">SCBC</option>
-            <option value="obc">OBC</option>
-            <option value="st">ST</option>
-            <option value="sc">SC</option>
-            <option value="ews">EWS</option>
-        </select><br><br>
+            <label for="category">CATEGORY</label>
+            <select id="category" name="category" required>
+                <option value="">-- Select --</option>
+                <option value="general">General</option>
+                <option value="scbc">SCBC</option>
+                <option value="obc">OBC</option>
+                <option value="st">ST</option>
+                <option value="sc">SC</option>
+                <option value="ews">EWS</option>
+            </select><br><br>
 
-        <label for="income">INCOME</label>
-        <select id="income" name="income" required>
-            <option value="">-- Select --</option>
-            <option value="Below 50000">Below rs. 50000</option>
-            <option value="50000_100000">50000_100000</option>
-            <option value="100000_200000">100000_200000</option>
-            <option value="200000_300000">200000_300000</option>
-            <option value="300000_400000">300000_400000</option>
-            <option value="400000_500000">400000_500000</option>
-            <option value="500000_600000">500000_600000</option>
-            <option value="600000_700000">500000_600000</option>
-            <option value="700000_800000">500000_600000</option>
-            <option value="more_800000">More 600000</option>
-        </select><br><br>
+            <label for="income">INCOME</label>
+            <select id="income" name="income" required>
+                <option value="">-- Select --</option>
+                <option value="Below 50000">Below rs. 50000</option>
+                <option value="50000_100000">50000_100000</option>
+                <option value="100000_200000">100000_200000</option>
+                <option value="200000_300000">200000_300000</option>
+                <option value="300000_400000">300000_400000</option>
+                <option value="400000_500000">400000_500000</option>
+                <option value="500000_600000">500000_600000</option>
+                <option value="600000_700000">500000_600000</option>
+                <option value="700000_800000">500000_600000</option>
+                <option value="more_800000">More 600000</option>
+            </select><br><br>
 
 
-        <input type="submit" value="Submit">
-    </form>
- 
-    {% if scholarships %}
-    <h2>Available Scholarships</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Scholarship Name</th>
-                <th>Details</th>
-                <th>Eligibility</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for scholarship in scholarships %}
-            <tr>
-                <td>{{ scholarship[0] }}</td>
-                <td>{{ scholarship[1] }}</td>
-                <td>{{ scholarship[2] }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
+            <input type="submit" value="Submit">
+        </form>
+
+        {% if scholarships %}
+        <h2>Available Scholarships</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Scholarship Name</th>
+                    <th>Details</th>
+                    <th>Eligibility</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for scholarship in scholarships %}
+                <tr>
+                    <td>{{ scholarship[0] }}</td>
+                    <td>{{ scholarship[1] }}</td>
+                    <td>{{ scholarship[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
         <p>No scholarships found matching your criteria.</p>
-    {% endif %}
+        {% endif %}
 
-    {% if error %}
+        {% if error %}
         <p style="color: red;">{{ error }}</p>
-    {% endif %}
-</section>
+        {% endif %}
+    </section>
 
-<section id="allScholarship">
-    <h2>Category Wise ScholarShip</h2>
-    <div class="scholarship-container">
-        <a href="scholarships.html?category=general" class="scholarship-box">
-            <div>
-                <h3>General Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=sebc" class="scholarship-box">
-            <div>
-                <h3>SEBC Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=obc" class="scholarship-box">
-            <div>
-                <h3>OBC Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=st" class="scholarship-box">
-            <div>
-                <h3>ST Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=sc" class="scholarship-box">
-            <div>
-                <h3>SC Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=ews" class="scholarship-box">
-            <div>
-                <h3>EWS Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-    </div>
-    
-    <!-- Scholarships List Section (This will be dynamically updated) -->
-    <div id="scholarship-list"></div>
-        
-</section>
+    <section id="allScholarship">
+        <h2>Category Wise ScholarShip</h2>
+        <div class="scholarship-container">
+            <a href="scholarships.html?category=general" class="scholarship-box">
+                <div>
+                    <h3>General Category</h3>
+                    <p>Click to view eligible scholarships</p>
+                </div>
+            </a>
+            <a href="scholarships.html?category=sebc" class="scholarship-box">
+                <div>
+                    <h3>SEBC Category</h3>
+                    <p>Click to view eligible scholarships</p>
+                </div>
+            </a>
+            <a href="scholarships.html?category=obc" class="scholarship-box">
+                <div>
+                    <h3>OBC Category</h3>
+                    <p>Click to view eligible scholarships</p>
+                </div>
+            </a>
+            <a href="scholarships.html?category=st" class="scholarship-box">
+                <div>
+                    <h3>ST Category</h3>
+                    <p>Click to view eligible scholarships</p>
+                </div>
+            </a>
+            <a href="scholarships.html?category=sc" class="scholarship-box">
+                <div>
+                    <h3>SC Category</h3>
+                    <p>Click to view eligible scholarships</p>
+                </div>
+            </a>
+            <a href="scholarships.html?category=ews" class="scholarship-box">
+                <div>
+                    <h3>EWS Category</h3>
+                    <p>Click to view eligible scholarships</p>
+                </div>
+            </a>
+        </div>
 
+        <!-- Scholarships List Section (This will be dynamically updated) -->
+        <div id="scholarship-list"></div>
 
-<h2 id="about">About Us</h2>
-<p>Scholarship Finder is a comprehensive platform designed to help students find scholarships that match their unique profiles. Whether you're looking for scholarships based on category, gender, income, or other factors, we make it simple to search and apply for funding opportunities that can help you achieve your educational goals.</p>
+    </section>
 
-<p><strong>Our Mission:</strong> To make education more accessible by connecting students with scholarships tailored to their specific needs. We aim to break down the barriers that many students face when trying to find the right financial assistance and provide them with an easy, reliable way to discover scholarships.</p>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Scholarship Finder is a comprehensive platform designed to help students find scholarships that match their
+            unique profiles. Whether you're looking for scholarships based on category, gender, income, or other
+            factors, we make it simple to search and apply for funding opportunities that can help you achieve your
+            educational goals.</p>
 
-<p><strong>How It Works:</strong> To get started, simply fill out a short form with details like your gender, income range, and category. Based on your profile, our Scholarship Finder will search through a wide range of available scholarships and display the most relevant opportunities for you to apply for.</p>
+        <p><strong>Our Mission:</strong> To make education more accessible by connecting students with scholarships
+            tailored to their specific needs. We aim to break down the barriers that many students face when trying to
+            find the right financial assistance and provide them with an easy, reliable way to discover scholarships.
+        </p>
 
-<h3>Why Choose Us?</h3>
-<ul>
-    <li><strong>Tailored results:</strong> Scholarships tailored to your profile.</li>
-    <li><strong>Comprehensive database:</strong> We pull from a wide range of scholarships across categories and regions.</li>
-    <li><strong>User-friendly:</strong> Simple, intuitive design makes it easy to find the right scholarships.</li>
-    <li><strong>Reliable information:</strong> We work to provide the most up-to-date scholarship information to ensure you're not missing out.</li>
-</ul>
+        <p><strong>How It Works:</strong> To get started, simply fill out a short form with details like your gender,
+            income range, and category. Based on your profile, our Scholarship Finder will search through a wide range
+            of available scholarships and display the most relevant opportunities for you to apply for.</p>
 
-<p><strong>Our Team:</strong> Our team consists of passionate individuals who are dedicated to helping students succeed. From experienced developers to education advocates, we work together to create an easy-to-use platform that empowers students to secure funding for their education.</p>
+        <h3>Why Choose Us?</h3>
+        <ul>
+            <li><strong>Tailored results:</strong> Scholarships tailored to your profile.</li>
+            <li><strong>Comprehensive database:</strong> We pull from a wide range of scholarships across categories and
+                regions.</li>
+            <li><strong>User-friendly:</strong> Simple, intuitive design makes it easy to find the right scholarships.
+            </li>
+            <li><strong>Reliable information:</strong> We work to provide the most up-to-date scholarship information to
+                ensure you're not missing out.</li>
+        </ul>
 
-<p>Ready to find the perfect scholarship? <a href="#find">Start your search today!</a></p>
+        <p><strong>Our Team:</strong> Our team consists of passionate individuals who are dedicated to helping students
+            succeed. From experienced developers to education advocates, we work together to create an easy-to-use
+            platform that empowers students to secure funding for their education.</p>
+
+        <p>Ready to find the perfect scholarship? <a href="#find">Start your search today!</a></p>
+    </section>
 
 </body>
+
 </html>
