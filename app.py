@@ -27,24 +27,31 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/find", methods=["POST", "GET"])
+@app.route("/find", methods=["GET", "POST"])
 def findscholarship():
+    scholarships = None  # Ensure it's None on initial page load
     try:
-        category = request.form.get("category")
-        gender = request.form.get("gender")
-        income = request.form.get("income")
-        conn = getdatabase()
-        cursor = conn.cursor()
-        cursor.execute(
-            """SELECT ScholarshipName,Details,Eligibility  FROM scholarships WHERE category = %s AND gender = %s AND income = %s""",
-            (category, gender, income),
-        )
-        scholarships = cursor.fetchall()
-        cursor.close()
-        conn.close()
-        return render_template("home.html", scholarships=scholarships)
+        if request.method == "POST":  # Only search when form is submitted
+            category = request.form.get("category")
+            gender = request.form.get("gender")
+            income = request.form.get("income")
+
+            conn = getdatabase()
+            cursor = conn.cursor()
+            cursor.execute(
+                """SELECT ScholarshipName, Details, Eligibility FROM scholarships 
+                   WHERE category = %s AND gender = %s AND income = %s""",
+                (category, gender, income),
+            )
+            scholarships = cursor.fetchall()
+
+            cursor.close()
+            conn.close()
     except Exception as e:
-        print(e)
+        print("Error:", e)
+
+    return render_template("home.html", scholarships=scholarships)
+
 
 
 @app.route("/allscholarships", methods=["GET"])

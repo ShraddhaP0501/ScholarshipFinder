@@ -67,7 +67,7 @@
     </form>
     <br>
 
-    {% if scholarships %}
+    {% if scholarships is not none and scholarships|length > 0 %}
     <h2>Available Scholarships</h2>
     <table border="1">
         <thead>
@@ -87,9 +87,12 @@
             {% endfor %}
         </tbody>
     </table>
-    {% elif scholarships is not none and scholarships|length == 0 %}
+
+{% elif scholarships is not none and request.args %}  
+    <!-- This ensures "No scholarships found" only appears when a search has been made -->
     <p>No scholarships found matching your criteria.</p>
-    {% endif %}
+{% endif %}
+
 </section>
 
 <!--Category wise scholarship-->
