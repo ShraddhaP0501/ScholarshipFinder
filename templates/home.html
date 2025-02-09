@@ -4,19 +4,26 @@
 {% block content %}
 <!--Home Page-->
 <section id="home">
-    <h1 id="home">ScholarShip Finder</h1>
-    <P><b class="bold">Welcome to the Scholarship Finder</b><br>
-
-        Finding the right scholarship can be a challenge, but we make it easy for you! Our Scholarship Finder helps
-        students discover the scholarships they are eligible for based on their unique profiles. Whether you’re
-        looking for opportunities in a specific category, income range, or gender, our platform is here to guide you
-        every step of the way.
-
-        Simply enter your details, and let us do the hard work. We search through a wide range of scholarships and
-        display only those that match your criteria. With just a few clicks, you can unlock the scholarships that
-        can help you achieve your educational goals!</P>
-
+    <div class="home-container">
+        <div class="text-box">
+            <h1>Scholarship Finder</h1>
+            <p><b>Welcome to the Scholarship Finder</b><br>
+                Finding the right scholarship can be a challenge, but we make it easy for you! Our Scholarship Finder 
+                helps students discover the scholarships they are eligible for based on their unique profiles.
+            </p>
+            <p>
+                Simply enter your details, and let us do the hard work. We search through a wide range of 
+                scholarships and display only those that match your criteria. With just a few clicks, you can unlock 
+                the scholarships that can help you achieve your educational goals!
+            </p>
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images.jpg') }}" alt="Scholarship Image">
+        </div>
+    </div>
 </section>
+
+
 
 <!--Find Scholarship-->
 <section id="find">
