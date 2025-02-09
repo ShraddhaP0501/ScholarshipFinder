@@ -121,54 +121,33 @@ td {
 .scholarship-container {
     display: flex;
     justify-content: center;
-    /* Center boxes horizontally */
-    flex-wrap: wrap;
-    /* Allows wrapping on smaller screens */
     gap: 20px;
-    /* Space between boxes */
+    /* Space between squares */
     padding: 20px;
 }
 
 .scholarship-box {
-    background-color: #007BFF;
+    width: 200px;
+    height: 200px;
+    background: #007bff;
     color: white;
-    padding: 20px;
-    width: 250px;
-    /* Fixed width */
-    height: 180px;
-    /* Fixed height */
-    border-radius: 10px;
     text-align: center;
+    text-decoration: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, background 0.3s;
 }
 
-.scholarship-box h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
+.scholarship-box:hover {
+    background: #0056b3;
+    transform: scale(1.05);
 }
 
-.scholarship-box p {
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.btn {
-    display: inline-block;
-    background-color: white;
-    color: #007BFF;
-    text-decoration: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-    color: white;
+.scholarship-box div {
+    padding: 10px;
 }
 
 /* Footer Styling */
@@ -206,7 +185,6 @@ td {
 .footer-section ul {
     font-size: 14px;
     line-height: 1.6;
-    
 }
 
 .footer-section ul {
@@ -269,11 +247,13 @@ main {
 /* Full-Screen Section */
 #home {
     width: 100%;
-    height: 100vh; /* Full-screen height */
+    height: 100vh;
+    /* Full-screen height */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 100px; /* Space from navbar */
+    padding-top: 100px;
+    /* Space from navbar */
     background-color: #f8f9fa;
 }
 
@@ -284,7 +264,8 @@ main {
     justify-content: space-between;
     width: 85%;
     max-width: 1400px;
-    gap: 50px; /* Space between text and image */
+    gap: 50px;
+    /* Space between text and image */
 }
 
 /* Text Box */
