@@ -93,42 +93,40 @@
 <section id="Categorywisescholarship">
     <h2>Choose By Category</h2>
     <div class="scholarship-container">
-        <a href="scholarships.html?category=general" class="scholarship-box">
-            <div>
-                <h3>General Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=sebc" class="scholarship-box">
-            <div>
-                <h3>SEBC Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=obc" class="scholarship-box">
-            <div>
-                <h3>OBC Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=st" class="scholarship-box">
-            <div>
-                <h3>ST Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=sc" class="scholarship-box">
-            <div>
-                <h3>SC Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
-        <a href="scholarships.html?category=ews" class="scholarship-box">
-            <div>
-                <h3>EWS Category</h3>
-                <p>Click to view eligible scholarships</p>
-            </div>
-        </a>
+        <div class="scholarship-box">
+            <h2>General Scholarships</h2>
+            <p>Click below to see all scholarships available for the General category.</p>
+            <a href="{{ url_for('general_scholarships') }}" class="btn">View General Scholarships</a>
+        </div>
+        <div class="scholarship-box">
+            <h2>SCBC Scholarships</h2>
+            <p>Click below to see all scholarships available for the SCBC category.</p>
+            <a href="{{ url_for('scbc_scholarships') }}" class="btn">View SCBC Scholarships</a>
+        </div>
+        <div class="scholarship-box">
+            <h2>OBC Scholarships</h2>
+            <p>Click below to see all scholarships available for the OBC category.</p>
+            <a href="{{ url_for('obc_scholarships') }}" class="btn">View OBC Scholarships</a>
+        </div>
+        <div class="scholarship-box">
+            <h2>ST Scholarships</h2>
+            <p>Click below to see all scholarships available for the ST category.</p>
+            <a href="{{ url_for('st_scholarships') }}" class="btn">View ST Scholarships</a>
+        </div>
+        <div class="scholarship-box">
+            <h2>SC Scholarships</h2>
+            <p>Click below to see all scholarships available for the SC category.</p>
+            <a href="{{ url_for('sc_scholarships') }}" class="btn">View SC Scholarships</a>
+        </div>
+        <div class="scholarship-box">
+            <h2>ews Scholarships</h2>
+            <p>Click below to see all scholarships available for the EWS category.</p>
+            <a href="{{ url_for('ews_scholarships') }}" class="btn">View EWS Scholarships</a>
+        </div>
+    </div>
+
+    <!-- Scholarships List Section (This will be dynamically updated) -->
+    <div id="scholarship-list"></div>
     </div>
 
     <!-- Scholarships List Section (This will be dynamically updated) -->
