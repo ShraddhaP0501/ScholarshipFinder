@@ -53,7 +53,6 @@ def findscholarship():
     return render_template("home.html", scholarships=scholarships)
 
 
-
 @app.route("/allscholarships", methods=["GET"])
 def allscholarships():
     try:
@@ -98,18 +97,18 @@ def general_scholarships():
 
 
 # Route to display SEBC scholarships
-@app.route("/scbc-scholarships")
-def scbc_scholarships():
+@app.route("/sebc-scholarships")
+def sebc_scholarships():
     try:
         conn = getdatabase()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details, Eligibility FROM scholarships WHERE category = 'scbc'"
+            "SELECT DISTINCT ScholarshipName, Details, Eligibility FROM scholarships WHERE category = 'sebc'"
         )
         scholarships = cursor.fetchall()
         cursor.close()
         conn.close()
-        return render_template("scbc_scholarship.html", scholarships=scholarships)
+        return render_template("sebc_scholarship.html", scholarships=scholarships)
     except Exception as e:
         print(e)
         return "Error fetching SEBC scholarships"

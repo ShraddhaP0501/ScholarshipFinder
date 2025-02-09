@@ -8,12 +8,12 @@
         <div class="text-box">
             <h1>Scholarship Finder</h1>
             <p><b>Welcome to the Scholarship Finder</b><br>
-                Finding the right scholarship can be a challenge, but we make it easy for you! Our Scholarship Finder 
+                Finding the right scholarship can be a challenge, but we make it easy for you! Our Scholarship Finder
                 helps students discover the scholarships they are eligible for based on their unique profiles.
             </p>
             <p>
-                Simply enter your details, and let us do the hard work. We search through a wide range of 
-                scholarships and display only those that match your criteria. With just a few clicks, you can unlock 
+                Simply enter your details, and let us do the hard work. We search through a wide range of
+                scholarships and display only those that match your criteria. With just a few clicks, you can unlock
                 the scholarships that can help you achieve your educational goals!
             </p>
         </div>
@@ -27,7 +27,7 @@
 
 <!--Find Scholarship-->
 <section id="find">
-    <h2 id="find">Find Scholarships</h2>
+    <h2>Find Scholarships</h2>
     <form action="/find" method="POST">
         <label for="gender">GENDER</label>
         <select id="gender" name="gender" required>
@@ -41,7 +41,7 @@
         <select id="category" name="category" required>
             <option value="">-- Select --</option>
             <option value="general">General</option>
-            <option value="scbc">SCBC</option>
+            <option value="sebc">SEBC</option>
             <option value="obc">OBC</option>
             <option value="st">ST</option>
             <option value="sc">SC</option>
@@ -88,10 +88,10 @@
         </tbody>
     </table>
 
-{% elif scholarships is not none and request.args %}  
+    {% elif scholarships is not none and request.args %}
     <!-- This ensures "No scholarships found" only appears when a search has been made -->
     <p>No scholarships found matching your criteria.</p>
-{% endif %}
+    {% endif %}
 
 </section>
 
@@ -105,9 +105,9 @@
             <a href="{{ url_for('general_scholarships') }}" class="btn">View General Scholarships</a>
         </div>
         <div class="scholarship-box">
-            <h2>SCBC Scholarships</h2>
-            <p>Click below to see all scholarships available for the SCBC category.</p>
-            <a href="{{ url_for('scbc_scholarships') }}" class="btn">View SCBC Scholarships</a>
+            <h2>SEBC Scholarships</h2>
+            <p>Click below to see all scholarships available for the SEBC category.</p>
+            <a href="{{ url_for('sebc_scholarships') }}" class="btn">View SEBC Scholarships</a>
         </div>
         <div class="scholarship-box">
             <h2>OBC Scholarships</h2>
