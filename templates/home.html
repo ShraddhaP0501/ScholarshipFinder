@@ -25,47 +25,58 @@
 
 
 
-<!--Find Scholarship-->
+<!-- Find Scholarship Section -->
 <section id="find">
-    <h2>Find Scholarships</h2>
-    <form action="/find" method="POST">
-        <label for="gender">GENDER</label>
-        <select id="gender" name="gender" required>
-            <option value="">-- Select --</option>
-            <option value="male">MALE</option>
-            <option value="female">FEMALE</option>
-            <option value="other">Other</option>
-        </select><br><br>
+    <div class="form-container">
+        <!-- Form on the left -->
+        <div class="form-content">
+            <h2>Find Scholarships</h2>
+            <form action="/find" method="POST">
+                <label for="gender">GENDER</label>
+                <select id="gender" name="gender" required>
+                    <option value="">-- Select --</option>
+                    <option value="male">MALE</option>
+                    <option value="female">FEMALE</option>
+                    <option value="other">Other</option>
+                </select><br><br>
 
-        <label for="category">CATEGORY</label>
-        <select id="category" name="category" required>
-            <option value="">-- Select --</option>
-            <option value="general">General</option>
-            <option value="sebc">SEBC</option>
-            <option value="obc">OBC</option>
-            <option value="st">ST</option>
-            <option value="sc">SC</option>
-            <option value="ews">EWS</option>
-        </select><br><br>
+                <label for="category">CATEGORY</label>
+                <select id="category" name="category" required>
+                    <option value="">-- Select --</option>
+                    <option value="general">General</option>
+                    <option value="sebc">SEBC</option>
+                    <option value="obc">OBC</option>
+                    <option value="st">ST</option>
+                    <option value="sc">SC</option>
+                    <option value="ews">EWS</option>
+                </select><br><br>
 
-        <label for="income">INCOME</label>
-        <select id="income" name="income" required>
-            <option value="">-- Select --</option>
-            <option value="Below 50000">Below Rs. 50000</option>
-            <option value="50000_100000">Rs. 50,000 - 1,00,000</option>
-            <option value="100000_200000">Rs. 1,00,000 - 2,00,000</option>
-            <option value="200000_300000">Rs. 2,00,000 - 3,00,000</option>
-            <option value="300000_400000">Rs. 3,00,000 - 4,00,000</option>
-            <option value="400000_500000">Rs. 4,00,000 - 5,00,000</option>
-            <option value="500000_600000">Rs. 5,00,000 - 6,00,000</option>
-            <option value="600000_700000">Rs. 6,00,000 - 7,00,000</option>
-            <option value="700000_800000">Rs. 7,00,000 - 8,00,000</option>
-            <option value="more_800000">More than Rs. 8,00,000</option>
-        </select><br><br>
+                <label for="income">INCOME</label>
+                <select id="income" name="income" required>
+                    <option value="">-- Select --</option>
+                    <option value="Below 50000">Below Rs. 50000</option>
+                    <option value="50000_100000">Rs. 50,000 - 1,00,000</option>
+                    <option value="100000_200000">Rs. 1,00,000 - 2,00,000</option>
+                    <option value="200000_300000">Rs. 2,00,000 - 3,00,000</option>
+                    <option value="300000_400000">Rs. 3,00,000 - 4,00,000</option>
+                    <option value="400000_500000">Rs. 4,00,000 - 5,00,000</option>
+                    <option value="500000_600000">Rs. 5,00,000 - 6,00,000</option>
+                    <option value="600000_700000">Rs. 6,00,000 - 7,00,000</option>
+                    <option value="700000_800000">Rs. 7,00,000 - 8,00,000</option>
+                    <option value="more_800000">More than Rs. 8,00,000</option>
+                </select><br><br>
 
-        <input type="submit" value="Submit">
-    </form>
-    <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <!-- Image on the right -->
+        <div class="form-image-container">
+            <img src="{{ url_for('static', filename='find-image.jpg') }}" alt="Find Scholarship">
+        </div>
+    </div>
+</section>
+
 
     {% if scholarships is not none and scholarships|length > 0 %}
     <h2>Available Scholarships</h2>
