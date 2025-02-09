@@ -275,3 +275,54 @@ main {
         width: 100%;
     }
 }
+
+/* Home Section - Flexbox for Side-by-Side Layout */
+#home {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 80vh;
+    padding: 40px;
+    background-color: #f8f9fa;
+}
+
+/* Text Section - 40% Width */
+.text-box {
+    width: 40%;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Image Section - 60% Width */
+.image-container {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive for Smaller Screens */
+@media (max-width: 768px) {
+    #home {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .text-box {
+        width: 90%;
+    }
+
+    .image-container {
+        width: 100%;
+    }
+}
