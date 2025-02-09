@@ -87,12 +87,8 @@
             {% endfor %}
         </tbody>
     </table>
-    {% else %}
+    {% elif scholarships is not none and scholarships|length == 0 %}
     <p>No scholarships found matching your criteria.</p>
-    {% endif %}
-
-    {% if error %}
-    <p style="color: red;">{{ error }}</p>
     {% endif %}
 </section>
 
