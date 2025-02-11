@@ -58,6 +58,7 @@ body {
     /* Adjust the width */
     border: 2px solid #0056b3;
     margin-left: auto;
+    margin: auto;
 }
 
 /* Search Input */
