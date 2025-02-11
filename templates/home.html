@@ -66,10 +66,9 @@
                     <option value="more_800000">More than Rs. 8,00,000</option>
                 </select><br><br>
 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" id="scholarships-section">
             </form>
         </div>
-
         <!-- Image on the right -->
         <div class="form-image-container">
             <img src="{{ url_for('static', filename='find-image.jpg') }}" alt="Find Scholarship">
@@ -77,34 +76,34 @@
     </div>
 </section>
 
+<section class="scholarships-section">
+    {% if scholarships is not none and scholarships|length > 0 %}
+    <h2>Available Scholarships</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Scholarship Name</th>
+                <th>Details</th>
+                <th>Eligibility</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for scholarship in scholarships %}
+            <tr>
+                <td>{{ scholarship[0] }}</td>
+                <td>{{ scholarship[1] }}</td>
+                <td>{{ scholarship[2] }}</td>
+                <td><a href="{{ scholarship[3] }}">{{ scholarship[3] }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-{% if scholarships is not none and scholarships|length > 0 %}
-<h2>Available Scholarships</h2>
-<table border="1">
-    <thead>
-        <tr>
-            <th>Scholarship Name</th>
-            <th>Details</th>
-            <th>Eligibility</th>
-            <th>Link</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for scholarship in scholarships %}
-        <tr>
-            <td>{{ scholarship[0] }}</td>
-            <td>{{ scholarship[1] }}</td>
-            <td>{{ scholarship[2] }}</td>
-            <td><a href="{{ scholarship[3] }}">{{ scholarship[3] }}</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
-{% elif scholarships is not none and request.args %}
-<!-- This ensures "No scholarships found" only appears when a search has been made -->
-<p>No scholarships found matching your criteria.</p>
-{% endif %}
+    {% elif scholarships is not none and request.args %}
+    <!-- This ensures "No scholarships found" only appears when a search has been made -->
+    <p>No scholarships found matching your criteria.</p>
+    {% endif %}
 
 </section>
 
