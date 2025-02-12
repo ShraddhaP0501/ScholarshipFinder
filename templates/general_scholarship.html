@@ -6,9 +6,14 @@
     <h2>General Scholarships</h2>
     <table>
         <tr>
-            <th>Name</th>
+            <th>Scholarship Name</th>
             <th>Details</th>
-            <th>Eligibility</th>
+            <th>Domicile</th>
+            <th>Academic Performance</th>
+            <th>Family Income</th>
+            <th>Course</th>
+            <th>Diploma to Degree(D2D)</th>
+            <th>Class Group</th>
             <th>Link</th>
         </tr>
         {% for scholarship in scholarships %}
@@ -16,6 +21,11 @@
             <td>{{ scholarship[0] }}</td>
             <td>{{ scholarship[1] }}</td>
             <td>{{ scholarship[2] }}</td>
+            <td>{{ scholarship[3] }}</td>
+            <td>{{ scholarship[4] }}</td>
+            <td>{{ scholarship[5] }}</td>
+            <td>{{ scholarship[6] }}</td>
+            <td>{{ scholarship[7] }}</td>
             <td><a href="{{ scholarship['Link'] }}" target="_blank">Apply Here</a></td>
         </tr>
         {% endfor %}
