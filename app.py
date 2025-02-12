@@ -1,5 +1,5 @@
 import mysql.connector
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import os
 from dotenv import load_dotenv
 
@@ -51,6 +51,63 @@ def findscholarship():
         print("Error:", e)
 
     return render_template("home.html", scholarships=scholarships)
+
+
+@app.route("/search", methods=["GET"])
+def search_scholarship():
+    try:
+        query = request.args.get("query", "").strip()
+        scholarships = []
+        scholarship_names = []
+        print(query)
+        conn = getdatabase()
+        if conn:
+            cursor = conn.cursor(dictionary=True)
+
+            # Fetch all scholarship names for the datalist
+            cursor.execute("SELECT DISTINCT ScholarshipName FROM scholarships")
+            scholarship_names = [row["ScholarshipName"] for row in cursor.fetchall()]
+
+            # Fetch search results if a query is provided
+            if query:
+                sql_query = "SELECT DISTINCT ScholarshipName, Details, Eligibility, Link FROM scholarships WHERE ScholarshipName LIKE %s"
+                cursor.execute(sql_query, (f"%{query}%",))
+                scholarships = cursor.fetchall()
+
+            cursor.close()
+            conn.close()
+        else:
+            print("❌ Database connection failed.")
+
+        return render_template(
+            "search_results.html",
+            scholarships=scholarships,
+            query=query,
+            scholarship_names=scholarship_names,  # Pass names for datalist
+        )
+    except Exception as e:
+        print("⚠️ Error in search functionality:", e)
+        return f"An error occurred while searching for scholarships: {e}"
+
+
+@app.route("/autocomplete", methods=["GET"])
+def autocomplete():
+    query = request.args.get("query", "").strip()
+    suggestions = []
+
+    if len(query) >= 3:
+        conn = getdatabase()
+        if conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                "SELECT DISTINCT ScholarshipName FROM scholarships WHERE ScholarshipName LIKE %s LIMIT 10",
+                (f"%{query}%",),
+            )
+            suggestions = [row[0] for row in cursor.fetchall()]
+            cursor.close()
+            conn.close()
+
+    return jsonify(suggestions)
 
 
 @app.route("/allscholarships", methods=["GET"])

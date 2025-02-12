@@ -1,10 +1,12 @@
 {% extends "base.html" %}
-{% block title %}All - Scholarship Finder{% endblock %}
+
+{% block title %}Search Results - Scholarship Finder{% endblock %}
 
 {% block content %}
-<section id="all_scholarships">
-    {% if all_scholarships %}
-    <h2>All Scholarships</h2>
+<section id="search_scholarship">
+    <h2>Search Results for "{{ query }}"</h2>
+
+    {% if scholarships %}
     <table border="1">
         <thead>
             <tr>
@@ -15,18 +17,20 @@
             </tr>
         </thead>
         <tbody>
-            {% for scholarship in all_scholarships %}
+            {% for scholarship in scholarships %}
             <tr>
-                <td>{{ scholarship[0] }}</td>
-                <td>{{ scholarship[1] }}</td>
-                <td>{{ scholarship[2] }}</td>
+                <td>{{ scholarship['ScholarshipName'] }}</td>
+                <td>{{ scholarship['Details'] }}</td>
+                <td>{{ scholarship['Eligibility'] }}</td>
                 <td><a href="{{ scholarship['Link'] }}" target="_blank">Apply Here</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% else %}
-    <p>No scholarships found.</p>
+    <p>No scholarships found for "{{ query }}".</p>
     {% endif %}
+
+    <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
 </section>
 {% endblock %}
