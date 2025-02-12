@@ -50,15 +50,18 @@ body {
 /* Search Bar */
 .search-form {
     display: flex;
-    align-items: left;
+    align-items: center;
+    /* Fix alignment */
     background: white;
     border-radius: 20px;
     padding: 5px;
     width: 400px;
-    /* Adjust the width */
+    /* Adjust width if needed */
     border: 2px solid #0056b3;
     margin-left: auto;
-    margin: auto;
+    /* Pushes to the right */
+    margin-right: 20px;
+    /* Adjust for fine-tuning */
 }
 
 /* Search Input */
