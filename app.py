@@ -39,7 +39,7 @@ def findscholarship():
             conn = getdatabase()
             cursor = conn.cursor()
             cursor.execute(
-                """SELECT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,DiplomatoDegree(D2D),ClassGroup,Link FROM scholarships 
+                """SELECT ScholarshipName, Details, Domicile, AcademicPerformance, FamilyIncome, Course,D2D, ClassGroup, Link FROM scholarships 
                    WHERE category = %s AND gender = %s AND income = %s""",
                 (category, gender, income),
             )
