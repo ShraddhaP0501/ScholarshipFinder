@@ -24,14 +24,14 @@
         <tbody>
             {% for scholarship in scholarships %}
             <tr>
-                <td>{{ scholarship[0] }}</td>
-                <td>{{ scholarship[1] }}</td>
-                <td>{{ scholarship[2] }}</td>
-                <td>{{ scholarship[3] }}</td>
-                <td>{{ scholarship[4] }}</td>
-                <td>{{ scholarship[5] }}</td>
-                <td>{{ scholarship[6] }}</td>
-                <td>{{ scholarship[7] }}</td>
+                <td>{{ scholarship['ScholarshipName'] }}</td>
+                <td>{{ scholarship['Details'] }}</td>
+                <td>{{ scholarship['Domicile'] }}</td>
+                <td>{{ scholarship['AcademicPerformance'] }}</td>
+                <td>{{ scholarship['FamilyIncome'] }}</td>
+                <td>{{ scholarship['Course'] }}</td>
+                <td>{{ scholarship['D2D'] }}</td>
+                <td>{{ scholarship['ClassGroup'] }}</td>
                 <td><a href="{{ scholarship['Link'] }}" target="_blank">Apply Here</a></td>
             </tr>
             {% endfor %}
