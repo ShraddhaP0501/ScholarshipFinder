@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "footer_header.html" %}
 {% block title %}All - Scholarship Finder{% endblock %}
 
 {% block content %}
@@ -16,7 +16,6 @@
                 <th>Course</th>
                 <th>Diploma to Degree(D2D)</th>
                 <th>Class Group</th>
-                <th>Link</th>
             </tr>
         </thead>
         <tbody>
@@ -30,11 +29,11 @@
                 <td>{{ scholarship[5] }}</td>
                 <td>{{ scholarship[6] }}</td>
                 <td>{{ scholarship[7] }}</td>
-                <td><a href="{{ scholarship['Link'] }}" target="_blank">Apply Here</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
     {% else %}
     <p>No scholarships found.</p>
     {% endif %}

@@ -31,7 +31,7 @@
         <!-- Form on the left -->
         <div class="form-content">
             <h2>Find Scholarships</h2>
-            <form action="/find" method="POST">
+            <form action="/find#scholarships-section" method="POST">
                 <label for="gender">GENDER</label>
                 <select id="gender" name="gender" required>
                     <option value="">-- Select --</option>
@@ -66,7 +66,7 @@
                     <option value="more_800000">More than Rs. 8,00,000</option>
                 </select><br><br>
 
-                <input type="submit" value="Submit" id="scholarships-section">
+                <input type="submit" value="Submit">
             </form>
         </div>
         <!-- Image on the right -->
@@ -76,7 +76,7 @@
     </div>
 </section>
 
-<section class="scholarships-section">
+<section class="scholarships-section" id="scholarships-section">
     {% if scholarships is not none and scholarships|length > 0 %}
     <h2>Available Scholarships</h2>
     <table border="1">
@@ -90,7 +90,6 @@
                 <th>Course</th>
                 <th>Diploma to Degree(D2D)</th>
                 <th>Class Group</th>
-                <th>Link</th>
             </tr>
         </thead>
         <tbody>
@@ -104,7 +103,6 @@
                 <td>{{ scholarship[5] }}</td>
                 <td>{{ scholarship[6] }}</td>
                 <td>{{ scholarship[7] }}</td>
-                <td><a href="{{ scholarship['Link'] }}" target="_blank">Apply Here</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -147,7 +145,7 @@
             <a href="{{ url_for('sc_scholarships') }}" class="btn">View SC Scholarships</a>
         </div>
         <div class="scholarship-box">
-            <h2>ews Scholarships</h2>
+            <h2>EWS Scholarships</h2>
             <p>Click below to see all scholarships available for the EWS category.</p>
             <a href="{{ url_for('ews_scholarships') }}" class="btn">View EWS Scholarships</a>
         </div>
