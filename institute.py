@@ -68,7 +68,7 @@ def login():
             session["institute_id"] = user[0]
             session["email"] = email
             flash("Login successful!", "success")
-            return redirect(url_for("institute.add_scholarship"))
+            return redirect(url_for("institute.dashboard"))
         else:
             flash("Invalid email or password.", "error")
             return redirect(url_for("institute.login"))
