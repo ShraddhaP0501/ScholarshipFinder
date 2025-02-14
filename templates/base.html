@@ -16,11 +16,12 @@
                 <li><a href="#find">Find</a></li>
                 <li><a href="/allscholarships">Scholarships</a></li>
                 <li>
-                    <a href="{{ url_for('institute.dashboard') if 'institute_id' in session else url_for('institute.login') }}">
+                    <a
+                        href="{{ url_for('institute.dashboard') if 'institute_id' in session else url_for('institute.login') }}">
                         Institute Portal
                     </a>
                 </li>
-                <!--<li><a href="#Categorywisescholarship">Categories</a></li>-->
+                <li><a href="#Categorywisescholarship">Categories</a></li>
                 <li><a href="#about">About Us</a></li>
             </ul>
             <form action="/search" method="GET" class="search-form">

@@ -4,6 +4,9 @@
 {% block content %}
 <section id="st_scholarships">
     <h2>ST Scholarships</h2>
+    <!-- Active Scholarships Section -->
+    <h3 style="color: green;">Active Scholarships</h3>
+    {% if active_scholarships %}
     <table>
         <tr>
             <th>Scholarship Name</th>
@@ -12,12 +15,11 @@
             <th>Academic Performance</th>
             <th>Family Income</th>
             <th>Course</th>
-            <th>Diploma to Degree(D2D)</th>
+            <th>Diploma to Degree (D2D)</th>
             <th>Class Group</th>
             <th>Link</th>
-
         </tr>
-        {% for scholarship in scholarships %}
+        {% for scholarship in active_scholarships %}
         <tr>
             <td>{{ scholarship[0] }}</td>
             <td>{{ scholarship[1] }}</td>
@@ -31,6 +33,42 @@
         </tr>
         {% endfor %}
     </table>
+    {% else %}
+    <p style="color: red;">No active scholarships available.</p>
+    {% endif %}
+
+    <!-- Inactive Scholarships Section -->
+    <h3 style="color: gray;">Inactive Scholarships</h3>
+    {% if inactive_scholarships %}
+    <table>
+        <tr>
+            <th>Scholarship Name</th>
+            <th>Details</th>
+            <th>Domicile</th>
+            <th>Academic Performance</th>
+            <th>Family Income</th>
+            <th>Course</th>
+            <th>Diploma to Degree (D2D)</th>
+            <th>Class Group</th>
+            <th>Link</th>
+        </tr>
+        {% for scholarship in inactive_scholarships %}
+        <tr style="color: gray;">
+            <td>{{ scholarship[0] }}</td>
+            <td>{{ scholarship[1] }}</td>
+            <td>{{ scholarship[2] }}</td>
+            <td>{{ scholarship[3] }}</td>
+            <td>{{ scholarship[4] }}</td>
+            <td>{{ scholarship[5] }}</td>
+            <td>{{ scholarship[6] }}</td>
+            <td>{{ scholarship[7] }}</td>
+            <td><a href="{{ scholarship[8] }}" target="_blank">View Details</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p style="color: red;">No inactive scholarships available.</p>
+    {% endif %}
 
     <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
 </section>
