@@ -2,6 +2,7 @@ import mysql.connector
 from flask import Flask, render_template, request, jsonify
 import os
 from dotenv import load_dotenv
+from datetime import datetime
 from institute import bp as institute_bp 
 
 app = Flask(__name__)
@@ -146,13 +147,34 @@ def general_scholarships():
     try:
         conn = getdatabase()
         cursor = conn.cursor()
-        cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE category = 'general'"
-        )
-        scholarships = cursor.fetchall()
+
+        today = datetime.today().strftime('%Y-%m-%d')
+
+        query_active = """
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link FROM scholarships 
+            WHERE category = 'general' AND end_date >= %s
+        """
+        query_inactive = """
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance, 
+                            FamilyIncome, Course, D2D, ClassGroup, Link 
+            FROM scholarships 
+            WHERE category = 'general' AND end_date < %s
+        """
+
+        cursor.execute(query_active, (today,))
+        active_scholarships = cursor.fetchall()
+
+        cursor.execute(query_inactive, (today,))
+        inactive_scholarships = cursor.fetchall()
+
         cursor.close()
         conn.close()
-        return render_template("general_scholarship.html", scholarships=scholarships)
+
+        return render_template(
+            "general_scholarship.html", 
+            active_scholarships=active_scholarships, 
+            inactive_scholarships=inactive_scholarships
+        )
     except Exception as e:
         print(e)
         return "Error fetching General scholarships"
@@ -164,13 +186,34 @@ def sebc_scholarships():
     try:
         conn = getdatabase()
         cursor = conn.cursor()
-        cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE category = 'sebc'"
-        )
-        scholarships = cursor.fetchall()
+       
+        today = datetime.today().strftime('%Y-%m-%d')
+
+        query_active = """
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link FROM scholarships 
+            WHERE category = 'general' AND end_date >= %s
+        """
+        query_inactive = """
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance, 
+                            FamilyIncome, Course, D2D, ClassGroup, Link 
+            FROM scholarships 
+            WHERE category = 'general' AND end_date < %s
+        """
+
+        cursor.execute(query_active, (today,))
+        active_scholarships = cursor.fetchall()
+
+        cursor.execute(query_inactive, (today,))
+        inactive_scholarships = cursor.fetchall()
+
         cursor.close()
         conn.close()
-        return render_template("sebc_scholarship.html", scholarships=scholarships)
+
+        return render_template(
+            "general_scholarship.html", 
+            active_scholarships=active_scholarships, 
+            inactive_scholarships=inactive_scholarships
+        )
     except Exception as e:
         print(e)
         return "Error fetching SEBC scholarships"
