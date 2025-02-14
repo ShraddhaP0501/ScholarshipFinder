@@ -633,3 +633,17 @@ main {
         max-width: 100%;
     }
 }
+
+=========.alert {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    margin-top: 15px;
+    text-align: left;
+}
+
+
+>>>>>>>>>Temporary merge branch 2
