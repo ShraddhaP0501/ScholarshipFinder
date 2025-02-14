@@ -7,9 +7,9 @@
 
     <nav>
         <ul>
-            <li><a href="/add_scholarship">Add Scholarship</a></li>
-            <li><a href="/my_scholarships">View My Scholarships</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="{{ url_for('institute.add_scholarship') }}">Add Scholarship</a></li>
+            <li><a href="{{ url_for('institute.my_scholarships') }}">View My Scholarships</a></li>
+            <li><a href="{{ url_for('institute.logout') }}">Logout</a></li>
         </ul>
     </nav>
 </section>
