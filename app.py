@@ -375,7 +375,7 @@ def SpecialScholarships():
             return "Error: Unable to connect to the database."
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT * FROM scholarships"
+            "SELECT * FROM special"
         )
         spl_scholarships = cursor.fetchall()
         cursor.close()
