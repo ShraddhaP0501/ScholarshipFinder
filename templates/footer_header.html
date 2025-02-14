@@ -14,14 +14,20 @@
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/find#find">Find</a></li>
-                <li><a href="/allscholarships">Scholarships</a></li>
+                <li class="dropdown">
+                    <a href="#">Scholarships ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/allscholarships">All Scholarships</a></li>
+                        <li><a href="#Categorywisescholarship">Categories</a></li>
+                        <li><a href="#SpecialScholarship">Special Scholarships</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a
                         href="{{ url_for('institute.dashboard') if 'institute_id' in session else url_for('institute.login') }}">
                         Institute Portal
                     </a>
                 </li>
-                <li><a href="/Categorywisescholarship">Categories</a></li>
                 <li><a href="#about">About Us</a></li>
             </ul>
             <form action="/search" method="GET" class="search-form">
