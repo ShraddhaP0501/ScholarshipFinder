@@ -1,14 +1,15 @@
 {% extends "footer_header.html" %}
-{% block title %}Dashboard - Scholarship Finder{% endblock %}
+{% block title %}All - Scholarship Finder{% endblock %}
 
 {% block content %}
 <section id="dashboard">
-    <h2>Welcome, {{ email }}!</h2>
+    <h2>Welcome, {{ session['email'] }}</h2>
 
     <nav>
         <ul>
-            <li><a href="{{ url_for('institute.add_scholarship') }}">Add Scholarship</a></li>
-            <li><a href="{{ url_for('institute.logout') }}">Logout</a></li>
+            <li><a href="/add_scholarship">Add Scholarship</a></li>
+            <li><a href="/my_scholarships">View My Scholarships</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </nav>
 </section>

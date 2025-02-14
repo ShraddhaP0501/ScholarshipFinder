@@ -5,10 +5,13 @@ from functools import wraps
 import os
 from dotenv import load_dotenv
 
-bp = Blueprint("institute", __name__, url_prefix="/institute")  # Correct Blueprint setup
+bp = Blueprint(
+    "institute", __name__, url_prefix="/institute"
+)  # Correct Blueprint setup
 bcrypt = Bcrypt()
 
 load_dotenv()
+
 
 # Database Connection
 def db_connection():
@@ -18,6 +21,7 @@ def db_connection():
         password=os.getenv("DATABASE_PASSWORD"),
         database=os.getenv("DATABASE_NAME"),
     )
+
 
 # Institute Registration
 @bp.route("/register", methods=["GET", "POST"])
@@ -51,6 +55,7 @@ def register():
 
     return render_template("register.html")
 
+
 # Institute Login
 @bp.route("/login", methods=["GET", "POST"])
 def login():
@@ -60,7 +65,9 @@ def login():
 
         conn = db_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT id, password_hash FROM institutes WHERE email = %s", (email,))
+        cursor.execute(
+            "SELECT id, password_hash FROM institutes WHERE email = %s", (email,)
+        )
         user = cursor.fetchone()
         conn.close()
 
@@ -75,11 +82,13 @@ def login():
 
     return render_template("login.html")
 
+
 @bp.route("/institute/logout")
 def logout():
     session.clear()  # Clears entire session
     flash("Logged out successfully.", "success")
     return redirect(url_for("institute.login"))
+
 
 # Protect routes: login required decorator
 def login_required(f):
@@ -91,6 +100,7 @@ def login_required(f):
         return f(*args, **kwargs)
 
     return decorated_function
+
 
 @bp.route("/dashboard")
 @login_required
@@ -127,7 +137,20 @@ def add_scholarship():
                 """INSERT INTO scholarships 
                 (ScholarshipName, Category, Gender, Income, Details, Domicile, AcademicPerformance, FamilyIncome, Course, D2D, ClassGroup, Link) 
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                (scholarship_name, category, gender, income, details, domicile, academic_performance, family_income, course, d2d, class_group, link),
+                (
+                    scholarship_name,
+                    category,
+                    gender,
+                    income,
+                    details,
+                    domicile,
+                    academic_performance,
+                    family_income,
+                    course,
+                    d2d,
+                    class_group,
+                    link,
+                ),
             )
             conn.commit()
             flash("Scholarship added successfully!", "success")
@@ -136,3 +159,15 @@ def add_scholarship():
             conn.close()
 
     return render_template("add_scholarship.html")
+
+
+@bp.route("/my_scholarships")
+@login_required
+def my_scholarships():
+    conn = db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM scholarships")
+    scholarships = cursor.fetchall()
+    conn.close()
+
+    return render_template("my_scholarships.html", scholarships=scholarships)
