@@ -367,7 +367,26 @@ def ews_scholarships():
         print(e)
         return "Error fetching EWS scholarships"
 
-
+@app.route("/SpecialScholarship", methods=["GET"])
+def SpecialScholarships():
+    try:
+        conn = getdatabase()
+        if not conn:
+            return "Error: Unable to connect to the database."
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT * FROM scholarships"
+        )
+        spl_scholarships = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return render_template(
+            "spl-scholarship.html", spl_scholarships=spl_scholarships
+        )
+    except Exception as e:
+        print("Error fetching all scholarships:", e)
+        return "Error: Unable to retrieve data."
+    
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
