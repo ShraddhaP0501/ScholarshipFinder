@@ -68,17 +68,16 @@ def login():
             session["institute_id"] = user[0]
             session["email"] = email
             flash("Login successful!", "success")
-            return redirect(url_for("institute.dashboard"))
+            return redirect(url_for("institute.add_scholarship"))
         else:
             flash("Invalid email or password.", "error")
             return redirect(url_for("institute.login"))
 
     return render_template("login.html")
 
-# Logout
-@bp.route("/logout")
+@bp.route("/institute/logout")
 def logout():
-    session.clear()
+    session.clear()  # Clears entire session
     flash("Logged out successfully.", "success")
     return redirect(url_for("institute.login"))
 
@@ -93,11 +92,11 @@ def login_required(f):
 
     return decorated_function
 
-# Dashboard (Login Required)
 @bp.route("/dashboard")
 @login_required
 def dashboard():
-    return f"Welcome to the dashboard, Institute {session['email']}!"
+    return render_template("dashboard.html", email=session["email"])
+
 
 # Add Scholarship (Login Required)
 @bp.route("/add_scholarship", methods=["GET", "POST"])
