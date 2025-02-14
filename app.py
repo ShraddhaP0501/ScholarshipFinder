@@ -2,8 +2,13 @@ import mysql.connector
 from flask import Flask, render_template, request, jsonify
 import os
 from dotenv import load_dotenv
+from institute import bp as institute_bp 
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key" 
+
+# Register the Blueprint
+app.register_blueprint(institute_bp)
 
 load_dotenv()
 
