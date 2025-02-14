@@ -39,7 +39,7 @@ def findscholarship():
             conn = getdatabase()
             cursor = conn.cursor()
             cursor.execute(
-                """SELECT ScholarshipName, Details, Domicile, AcademicPerformance, FamilyIncome, Course,D2D, ClassGroup FROM scholarships 
+                """SELECT ScholarshipName, Details, Domicile, AcademicPerformance, FamilyIncome, Course,D2D, ClassGroup,Link FROM scholarships 
                    WHERE category = %s AND gender = %s AND income = %s""",
                 (category, gender, income),
             )
@@ -70,7 +70,7 @@ def search_scholarship():
 
             # Fetch search results if a query is provided
             if query:
-                sql_query = "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup FROM scholarships WHERE ScholarshipName LIKE %s"
+                sql_query = "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE ScholarshipName LIKE %s"
                 cursor.execute(sql_query, (f"%{query}%",))
                 scholarships = cursor.fetchall()
 
@@ -119,7 +119,7 @@ def allscholarships():
 
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup FROM scholarships"
+            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships"
         )
         all_scholarships = cursor.fetchall()
         cursor.close()
@@ -142,7 +142,7 @@ def general_scholarships():
         conn = getdatabase()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup FROM scholarships WHERE category = 'general'"
+            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE category = 'general'"
         )
         scholarships = cursor.fetchall()
         cursor.close()
@@ -160,7 +160,7 @@ def sebc_scholarships():
         conn = getdatabase()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup FROM scholarships WHERE category = 'sebc'"
+            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE category = 'sebc'"
         )
         scholarships = cursor.fetchall()
         cursor.close()
@@ -178,7 +178,7 @@ def obc_scholarships():
         conn = getdatabase()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup FROM scholarships WHERE category = 'OBC'"
+            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE category = 'OBC'"
         )
         scholarships = cursor.fetchall()
         cursor.close()
@@ -196,7 +196,7 @@ def st_scholarships():
         conn = getdatabase()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup FROM scholarships WHERE category = 'st'"
+            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE category = 'st'"
         )
         scholarships = cursor.fetchall()
         cursor.close()
@@ -214,7 +214,7 @@ def sc_scholarships():
         conn = getdatabase()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT  DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup FROM scholarships WHERE category = 'sc'"
+            "SELECT  DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE category = 'sc'"
         )
         scholarships = cursor.fetchall()
         cursor.close()
@@ -232,7 +232,7 @@ def ews_scholarships():
         conn = getdatabase()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup FROM scholarships WHERE category = 'ews'"
+            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE category = 'ews'"
         )
         scholarships = cursor.fetchall()
         cursor.close()

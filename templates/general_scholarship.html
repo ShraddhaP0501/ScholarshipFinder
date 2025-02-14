@@ -14,6 +14,7 @@
             <th>Course</th>
             <th>Diploma to Degree(D2D)</th>
             <th>Class Group</th>
+            <th>Link</th>
         </tr>
         {% for scholarship in scholarships %}
         <tr>
@@ -25,6 +26,7 @@
             <td>{{ scholarship[5] }}</td>
             <td>{{ scholarship[6] }}</td>
             <td>{{ scholarship[7] }}</td>
+            <td><a href="{{ scholarship[8] }}" target="_blank">Apply Here</a></td>
         </tr>
         {% endfor %}
     </table>
