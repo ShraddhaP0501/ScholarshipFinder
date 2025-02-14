@@ -1,0 +1,47 @@
+{% extends "footer_header.html" %}
+{% block title %}All - Scholarship Finder{% endblock %}
+
+<section id="institue_scholarship">
+    <h2>My Scholarships</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <p class="{{ category }}">{{ message }}</p>
+    {% endfor %}
+    {% endwith %}
+
+    <table border="1">
+        <tr>
+            <th>Scholarship Name</th>
+            <th>Category</th>
+            <th>Gender</th>
+            <th>Income</th>
+            <th>Details</th>
+            <th>Domicile</th>
+            <th>Academic Performance</th>
+            <th>Family Income</th>
+            <th>Course</th>
+            <th>D2D</th>
+            <th>Class Group</th>
+            <th>Link</th>
+        </tr>
+        {% for s in scholarships %}
+        <tr>
+            <td>{{ s.ScholarshipName }}</td>
+            <td>{{ s.Category }}</td>
+            <td>{{ s.Gender }}</td>
+            <td>{{ s.Income }}</td>
+            <td>{{ s.Details }}</td>
+            <td>{{ s.Domicile }}</td>
+            <td>{{ s.AcademicPerformance }}</td>
+            <td>{{ s.FamilyIncome }}</td>
+            <td>{{ s.Course }}</td>
+            <td>{{ s.D2D }}</td>
+            <td>{{ s.ClassGroup }}</td>
+            <td><a href="{{ s.Link }}" target="_blank">Apply</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="/dashboard">Back to Dashboard</a></p>
+</section>

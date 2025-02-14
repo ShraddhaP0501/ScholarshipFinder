@@ -1,0 +1,32 @@
+{% extends "footer_header.html" %}
+{% block title %}All - Scholarship Finder{% endblock %}
+
+{% block content %}
+
+<section id="add_scholarships">
+    <h2>Add Scholarship</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, message in messages %}
+    <p class="{{ category }}">{{ message }}</p>
+    {% endfor %}
+    {% endwith %}
+
+    <form action="/add_scholarship" method="post">
+        <input type="text" name="scholarship_name" placeholder="Scholarship Name" required><br>
+        <input type="text" name="category" placeholder="Category" required><br>
+        <input type="text" name="gender" placeholder="Gender" required><br>
+        <input type="text" name="income" placeholder="Income Criteria" required><br>
+        <textarea name="details" placeholder="Scholarship Details"></textarea><br>
+        <input type="text" name="domicile" placeholder="Domicile"><br>
+        <input type="text" name="academic_performance" placeholder="Academic Performance"><br>
+        <input type="text" name="family_income" placeholder="Family Income"><br>
+        <input type="text" name="course" placeholder="Course Eligibility"><br>
+        <input type="text" name="d2d" placeholder="D2D Eligibility"><br>
+        <input type="text" name="class_group" placeholder="Class Group"><br>
+        <input type="url" name="link" placeholder="Application Link"><br>
+        <button type="submit">Add Scholarship</button>
+    </form>
+
+    <p><a href="/dashboard">Back to Dashboard</a></p>
+</section>
