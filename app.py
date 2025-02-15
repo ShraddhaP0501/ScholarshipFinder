@@ -4,12 +4,14 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime
 from institute import bp as institute_bp
+from student import stu_bp as student_bp
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
 
 # Register the Blueprint
 app.register_blueprint(institute_bp)
+app.register_blueprint(student_bp)
 
 load_dotenv()
 

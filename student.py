@@ -25,7 +25,7 @@ def db_connection():
 
 # student Registration
 @stu_bp.route("/register_stu", methods=["GET", "POST"])
-def register():
+def register_stu():
     if request.method == "POST":
         name = request.form.get("name")
         email = request.form.get("email")
@@ -58,7 +58,7 @@ def register():
 
 # student Login
 @stu_bp.route("/login", methods=["GET", "POST"])
-def login():
+def login_stu():
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
@@ -91,7 +91,7 @@ def logout():
 
 
 # Protect routes: login required decorator
-def login_required(f):
+def login_required_stu(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if "student_id" not in session:
@@ -103,8 +103,8 @@ def login_required(f):
 
 
 @stu_bp.route("/dashboard_stu")
-@login_required
-def dashboard():
+@login_required_stu
+def dashboard_stu():
     return render_template("dashboard_stu.html", email=session["email"])
 
 @stu_bp.route('/saved_scholarships')
