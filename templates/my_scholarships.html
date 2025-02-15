@@ -24,6 +24,7 @@
             <th>D2D</th>
             <th>Class Group</th>
             <th>Link</th>
+            <th>Check Status</th>
         </tr>
         {% for s in scholarships %}
         <tr>
@@ -38,7 +39,8 @@
             <td>{{ s.Course }}</td>
             <td>{{ s.D2D }}</td>
             <td>{{ s.ClassGroup }}</td>
-            <td><a href="{{ s.Link }}" target="_blank">Apply</a></td>
+            <td><a href="{{ s.Link }}" target="_blank">Apply Here</a></td>
+            <td><a href="{{ s.checkstatus }}" target="_blank">Check Here</a></td>
         </tr>
         {% endfor %}
     </table>
