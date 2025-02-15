@@ -339,7 +339,7 @@ def ews_scholarships():
         today = datetime.today().strftime("%Y-%m-%d")
 
         query_active = """
-            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link,checkstatusFROM scholarships 
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus FROM scholarships 
             WHERE category = 'general' AND end_date >= %s
         """
         query_inactive = """
