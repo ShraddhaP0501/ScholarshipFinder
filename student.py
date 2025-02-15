@@ -114,9 +114,11 @@ def save_scholarship():
         return redirect(url_for("student.login_stu"))
 
     user_id = session["user_id"]
-    ScholarshipName = request.form.get("ScholarshipName")  # Get value safely
+    ScholarshipName = request.form.get(
+        "ScholarshipName"
+    )  # Use .get() to prevent KeyError
 
-    print(f"DEBUG: user_id={user_id}, ScholarshipName={ScholarshipName}")  # Debugging
+    print(f"Saving Scholarship for user {user_id}: {ScholarshipName}")  # Debugging
 
     if not ScholarshipName:
         flash("Invalid scholarship data.", "error")
@@ -124,32 +126,26 @@ def save_scholarship():
 
     cur = mysql.connection.cursor()
 
-    try:
-        # Check if already saved
+    # Check if already saved
+    cur.execute(
+        "SELECT * FROM saved_scholarships WHERE user_id = %s AND ScholarshipName = %s",
+        (user_id, ScholarshipName),
+    )
+    existing = cur.fetchone()
+
+    if not existing:
         cur.execute(
-            "SELECT * FROM saved_scholarships WHERE user_id = %s AND ScholarshipName = %s",
+            "INSERT INTO saved_scholarships (user_id, ScholarshipName) VALUES (%s, %s)",
             (user_id, ScholarshipName),
         )
-        existing = cur.fetchone()
+        mysql.connection.commit()
+        flash("Scholarship saved successfully!", "success")
+        print("Scholarship successfully saved!")  # Debugging
+    else:
+        flash("You already saved this scholarship.", "info")
+        print("Scholarship already exists.")  # Debugging
 
-        if not existing:
-            cur.execute(
-                "INSERT INTO saved_scholarships (user_id, ScholarshipName) VALUES (%s, %s)",
-                (user_id, ScholarshipName),
-            )
-            mysql.connection.commit()
-            flash("Scholarship saved successfully!", "success")
-            print("DEBUG: Scholarship successfully saved!")  # Debugging
-        else:
-            flash("You already saved this scholarship.", "info")
-            print("DEBUG: Scholarship already exists.")  # Debugging
-    except Exception as e:
-        mysql.connection.rollback()  # Rollback if there's an error
-        print(f"ERROR: {str(e)}")  # Print the actual error
-        flash("Database error occurred.", "error")
-    finally:
-        cur.close()
-
+    cur.close()
     return redirect(request.referrer)
 
 
