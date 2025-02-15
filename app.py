@@ -45,7 +45,7 @@ def findscholarship():
             conn = getdatabase()
             cursor = conn.cursor()
             cursor.execute(
-                """SELECT ScholarshipName, Details, Domicile, AcademicPerformance, FamilyIncome, Course,D2D, ClassGroup,Link FROM scholarships 
+                """SELECT ScholarshipName, Details, Domicile, AcademicPerformance, FamilyIncome, Course,D2D, ClassGroup,Link, checkstatus FROM scholarships 
                    WHERE category = %s AND gender = %s AND income = %s""",
                 (category, gender, income),
             )
@@ -76,7 +76,7 @@ def search_scholarship():
 
             # Fetch search results if a query is provided
             if query:
-                sql_query = "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships WHERE ScholarshipName LIKE %s"
+                sql_query = "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link, checkstatus FROM scholarships WHERE ScholarshipName LIKE %s"
                 cursor.execute(sql_query, (f"%{query}%",))
                 scholarships = cursor.fetchall()
 
@@ -124,7 +124,7 @@ def allscholarships():
             return "Error: Unable to connect to the database."
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link FROM scholarships"
+            "SELECT DISTINCT ScholarshipName, Details,Domicile,AcademicPerformance,FamilyIncome,Course,D2D,ClassGroup,Link,checkstatus FROM scholarships"
         )
         all_scholarships = cursor.fetchall()
         cursor.close()
@@ -148,12 +148,12 @@ def general_scholarships():
         today = datetime.today().strftime("%Y-%m-%d")
 
         query_active = """
-            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link FROM scholarships 
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus FROM scholarships 
             WHERE category = 'general' AND end_date >= %s
         """
         query_inactive = """
             SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance, 
-                            FamilyIncome, Course, D2D, ClassGroup, Link 
+                            FamilyIncome, Course, D2D, ClassGroup, Link, checkstatus
             FROM scholarships 
             WHERE category = 'general' AND end_date < %s
         """
@@ -187,12 +187,12 @@ def sebc_scholarships():
         today = datetime.today().strftime("%Y-%m-%d")
 
         query_active = """
-            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link FROM scholarships 
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus FROM scholarships 
             WHERE category = 'general' AND end_date >= %s
         """
         query_inactive = """
             SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance, 
-                            FamilyIncome, Course, D2D, ClassGroup, Link 
+                            FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus 
             FROM scholarships 
             WHERE category = 'general' AND end_date < %s
         """
@@ -225,12 +225,12 @@ def obc_scholarships():
         today = datetime.today().strftime("%Y-%m-%d")
 
         query_active = """
-            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link FROM scholarships 
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus FROM scholarships 
             WHERE category = 'general' AND end_date >= %s
         """
         query_inactive = """
             SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance, 
-                            FamilyIncome, Course, D2D, ClassGroup, Link 
+                            FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus 
             FROM scholarships 
             WHERE category = 'general' AND end_date < %s
         """
@@ -263,12 +263,12 @@ def st_scholarships():
         today = datetime.today().strftime("%Y-%m-%d")
 
         query_active = """
-            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link FROM scholarships 
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus FROM scholarships 
             WHERE category = 'general' AND end_date >= %s
         """
         query_inactive = """
             SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance, 
-                            FamilyIncome, Course, D2D, ClassGroup, Link 
+                            FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus
             FROM scholarships 
             WHERE category = 'general' AND end_date < %s
         """
@@ -301,12 +301,12 @@ def sc_scholarships():
         today = datetime.today().strftime("%Y-%m-%d")
 
         query_active = """
-            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link FROM scholarships 
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus FROM scholarships 
             WHERE category = 'general' AND end_date >= %s
         """
         query_inactive = """
             SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance, 
-                            FamilyIncome, Course, D2D, ClassGroup, Link 
+                            FamilyIncome, Course, D2D, ClassGroup, Link,checkstatus
             FROM scholarships 
             WHERE category = 'general' AND end_date < %s
         """
@@ -339,12 +339,12 @@ def ews_scholarships():
         today = datetime.today().strftime("%Y-%m-%d")
 
         query_active = """
-            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link FROM scholarships 
+            SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance,FamilyIncome, Course, D2D, ClassGroup, Link,checkstatusFROM scholarships 
             WHERE category = 'general' AND end_date >= %s
         """
         query_inactive = """
             SELECT DISTINCT ScholarshipName, Details, Domicile, AcademicPerformance, 
-                            FamilyIncome, Course, D2D, ClassGroup, Link 
+                            FamilyIncome, Course, D2D, ClassGroup, Link, checkstatus
             FROM scholarships 
             WHERE category = 'general' AND end_date < %s
         """
