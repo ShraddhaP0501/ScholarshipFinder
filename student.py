@@ -106,34 +106,68 @@ def dashboard_stu():
     return render_template("dashboard_stu.html", email=session["email"])
 
 
-@stu_bp.route("/saved_scholarships")
+@stu_bp.route("/saved_scholarships", methods=["GET", "POST"])  # Allow POST here
 @stu_bp.route("/save_scholarship", methods=["POST"])
 def save_scholarship():
     if "user_id" not in session:
         flash("You must be logged in to save scholarships.", "error")
-        return redirect(url_for("login"))
+        return redirect(url_for("student.login_stu"))
 
     user_id = session["user_id"]
-    ScholarshipName = request.form["ScholarshipName"]
+    ScholarshipName = request.form.get("ScholarshipName")  # Get value safely
+
+    print(f"DEBUG: user_id={user_id}, ScholarshipName={ScholarshipName}")  # Debugging
+
+    if not ScholarshipName:
+        flash("Invalid scholarship data.", "error")
+        return redirect(request.referrer)
 
     cur = mysql.connection.cursor()
 
-    # Check if already saved
-    cur.execute(
-        "SELECT * FROM saved_scholarships WHERE user_id = %s AND ScholarshipName = %s",
-        (user_id, ScholarshipName),
-    )
-    existing = cur.fetchone()
-
-    if not existing:
+    try:
+        # Check if already saved
         cur.execute(
-            "INSERT INTO saved_scholarships (user_id, ScholarshipName) VALUES (%s, %s)",
+            "SELECT * FROM saved_scholarships WHERE user_id = %s AND ScholarshipName = %s",
             (user_id, ScholarshipName),
         )
-        mysql.connection.commit()
-        flash("Scholarship saved successfully!", "success")
-    else:
-        flash("You already saved this scholarship.", "info")
+        existing = cur.fetchone()
 
-    cur.close()
+        if not existing:
+            cur.execute(
+                "INSERT INTO saved_scholarships (user_id, ScholarshipName) VALUES (%s, %s)",
+                (user_id, ScholarshipName),
+            )
+            mysql.connection.commit()
+            flash("Scholarship saved successfully!", "success")
+            print("DEBUG: Scholarship successfully saved!")  # Debugging
+        else:
+            flash("You already saved this scholarship.", "info")
+            print("DEBUG: Scholarship already exists.")  # Debugging
+    except Exception as e:
+        mysql.connection.rollback()  # Rollback if there's an error
+        print(f"ERROR: {str(e)}")  # Print the actual error
+        flash("Database error occurred.", "error")
+    finally:
+        cur.close()
+
     return redirect(request.referrer)
+
+
+@stu_bp.route("/saved_scholarships")
+def saved_scholarships():
+    if "user_id" not in session:
+        flash("You must be logged in to view saved scholarships.", "error")
+        return redirect(
+            url_for("student.login")
+        )  # Ensure this matches your login route
+
+    user_id = session["user_id"]
+    cur = mysql.connection.cursor()
+
+    cur.execute(
+        "SELECT ScholarshipName FROM saved_scholarships WHERE user_id = %s", (user_id,)
+    )
+    saved_scholarships = cur.fetchall()
+    cur.close()
+
+    return render_template("saved_scholarships.html", scholarships=saved_scholarships)

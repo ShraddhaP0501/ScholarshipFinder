@@ -1,23 +1,14 @@
 {% extends "footer_header.html" %}
-{% block title %}All - Scholarship Finder{% endblock %}
 
-<h2>Saved Scholarships</h2>
-
-{% for scholarship in scholarships %}
-<div>
-    <h3>{{ scholarship[0] }}</h3> <!-- Scholarship Name -->
-    <p>Category: {{ scholarship[1] }}</p>
-    <p>Gender: {{ scholarship[2] }}</p>
-    <p>Income: {{ scholarship[3] }}</p>
-    <p>Details: {{ scholarship[4] }}</p>
-    <p>Domicile: {{ scholarship[5] }}</p>
-    <p>Academic Performance: {{ scholarship[6] }}</p>
-    <p>Family Income: {{ scholarship[7] }}</p>
-    <p>Course: {{ scholarship[8] }}</p>
-    <p>D2D: {{ scholarship[9] }}</p>
-    <p>Class Group: {{ scholarship[10] }}</p>
-    <p><a href="{{ scholarship[11] }}" target="_blank">Apply Here</a></p>
-    <p>Status: {{ scholarship[14] }}</p>
-</div>
-<hr>
-{% endfor %}
+{% block content %}
+<h2>My Saved Scholarships</h2>
+{% if scholarships %}
+<ul>
+    {% for scholarship in scholarships %}
+    <li>{{ scholarship[0] }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No saved scholarships yet.</p>
+{% endif %}
+{% endblock %}
