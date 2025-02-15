@@ -65,9 +65,7 @@ def login_stu():
 
         conn = db_connection()
         cursor = conn.cursor()
-        cursor.execute(
-            "SELECT id, password_hash FROM users WHERE email = %s", (email,)
-        )
+        cursor.execute("SELECT id, password_hash FROM users WHERE email = %s", (email,))
         user = cursor.fetchone()
         conn.close()
 
@@ -107,24 +105,35 @@ def login_required_stu(f):
 def dashboard_stu():
     return render_template("dashboard_stu.html", email=session["email"])
 
-@stu_bp.route('/saved_scholarships')
-def saved_scholarships():
-    if 'user_id' not in session:
-        return redirect(url_for('login'))
-    
-    user_id = session['user_id']
+
+@stu_bp.route("/saved_scholarships")
+@stu_bp.route("/save_scholarship", methods=["POST"])
+def save_scholarship():
+    if "user_id" not in session:
+        flash("You must be logged in to save scholarships.", "error")
+        return redirect(url_for("login"))
+
+    user_id = session["user_id"]
+    ScholarshipName = request.form["ScholarshipName"]
+
     cur = mysql.connection.cursor()
 
-    cur.execute("""
-        SELECT s.ScholarshipName, s.Category, s.Gender, s.Income, s.Details, s.Domicile, 
-               s.AcademicPerformance, s.FamilyIncome, s.Course, s.D2D, s.ClassGroup, 
-               s.Link, s.checkstatus
-        FROM scholarships s
-        JOIN saved_scholarships ss ON s.ScholarshipName = ss.ScholarshipName
-        WHERE ss.user_id = %s
-    """, (user_id,))
-    
-    saved_scholarships = cur.fetchall()
-    cur.close()
+    # Check if already saved
+    cur.execute(
+        "SELECT * FROM saved_scholarships WHERE user_id = %s AND ScholarshipName = %s",
+        (user_id, ScholarshipName),
+    )
+    existing = cur.fetchone()
 
-    return render_template('saved_scholarship.html', scholarships=saved_scholarships)
+    if not existing:
+        cur.execute(
+            "INSERT INTO saved_scholarships (user_id, ScholarshipName) VALUES (%s, %s)",
+            (user_id, ScholarshipName),
+        )
+        mysql.connection.commit()
+        flash("Scholarship saved successfully!", "success")
+    else:
+        flash("You already saved this scholarship.", "info")
+
+    cur.close()
+    return redirect(request.referrer)
