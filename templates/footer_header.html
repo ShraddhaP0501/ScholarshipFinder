@@ -28,6 +28,12 @@
                         Institute Portal
                     </a>
                 </li>
+                <li>
+                    <a
+                        href="{{ url_for('student.dashboard_stu') if 'student_id' in session else url_for('student.login_stu') }}">
+                        Student Portal
+                    </a>
+                </li>
                 <li><a href="#about">About Us</a></li>
             </ul>
             <form action="/search" method="GET" class="search-form">
