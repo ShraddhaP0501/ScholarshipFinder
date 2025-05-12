@@ -94,8 +94,8 @@ body {
 /* Sections */
 section {
     padding: 80px 20px 40px;
-    width: 80%;
-    margin: 10 auto;
+    width: auto;
+    margin: auto;
 }
 
 /* Find Scholarship Section */

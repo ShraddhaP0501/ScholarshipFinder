@@ -209,7 +209,7 @@ def sebc_scholarships():
         conn.close()
 
         return render_template(
-            "general_scholarship.html",
+            "sebc_scholarship.html",
             active_scholarships=active_scholarships,
             inactive_scholarships=inactive_scholarships,
         )
@@ -369,6 +369,7 @@ def ews_scholarships():
         print(e)
         return "Error fetching EWS scholarships"
 
+
 @app.route("/SpecialScholarship", methods=["GET"])
 def SpecialScholarships():
     try:
@@ -376,9 +377,7 @@ def SpecialScholarships():
         if not conn:
             return "Error: Unable to connect to the database."
         cursor = conn.cursor()
-        cursor.execute(
-            "SELECT * FROM special"
-        )
+        cursor.execute("SELECT * FROM special")
         spl_scholarships = cursor.fetchall()
         cursor.close()
         conn.close()
@@ -388,7 +387,8 @@ def SpecialScholarships():
     except Exception as e:
         print("Error fetching all scholarships:", e)
         return "Error: Unable to retrieve data."
-    
+
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html"), 404
