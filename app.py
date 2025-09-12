@@ -8,7 +8,7 @@ from student import stu_bp as student_bp
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
-
+#changes done
 # Register the Blueprint
 app.register_blueprint(institute_bp)
 app.register_blueprint(student_bp)
