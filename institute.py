@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash, session
-from flask_bcrypt import Bcrypt
+from passlib.hash import pbkdf2_sha256
 import mysql.connector
 from functools import wraps
 import os
@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 bp = Blueprint(
     "institute", __name__, url_prefix="/institute"
 )  # Correct Blueprint setup
-bcrypt = Bcrypt()
 
 load_dotenv()
 
@@ -35,7 +34,7 @@ def register():
             flash("All fields are required!", "error")
             return redirect(url_for("institute.register"))
 
-        hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+        hashed_password = pbkdf2_sha256.hash(password)
 
         try:
             conn = db_connection()
@@ -71,7 +70,7 @@ def login():
         user = cursor.fetchone()
         conn.close()
 
-        if user and bcrypt.check_password_hash(user[1], password):
+        if user and pbkdf2_sha256.verify(password, user[1]):
             session["institute_id"] = user[0]
             session["email"] = email
             flash("Login successful!", "success")
